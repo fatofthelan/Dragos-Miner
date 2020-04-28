@@ -1,0 +1,80 @@
+url: https://portal.dragos.com/api/v1/doc/
+description: >
+    Dragos Bad Actor threat intelligence Miner in JSON format.
+    Ensure you change the url:, API-Token:, and API-Secret: values
+    for BOTH prototypes below.
+
+prototypes:
+    DOMAIN:
+        author: Tobias Rice
+        development_status: EXPERIMENTAL
+        description: Dragos Bad Domain Names
+        node_type: miner
+        indicator_types:
+            - domain
+        tags:
+            - ConfidenceHigh
+            - ShareLevelGreen
+        class: minemeld.ft.json.SimpleJSON
+        config:
+            headers:
+                API-Token: "test-token-123"
+                API-Secret: "test-secret-123"
+                Accept: "application/json"
+                User-Agent: "MineMeld"
+            source_name: dragos.DOMAIN
+            subscription_id_required: true
+            url: https://someurl.something
+            extractor: "indicators[?indicator_type=='domain']"
+            prefix: dragos
+            indicator: value
+            fields:
+                - comment
+                - first_seen
+                - last_seen
+                - confidence
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 257
+            attributes:
+                type: domain
+                confidence: 100
+                share_level: red
+    IP:
+        author: Tobias Rice
+        development_status: EXPERIMENTAL
+        description: Dragos Bad IP Addressess
+        node_type: miner
+        indicator_types:
+            - IPv4
+        tags:
+            - ConfidenceHigh
+            - ShareLevelGreen
+        class: minemeld.ft.json.SimpleJSON
+        config:
+            headers:
+                API-Token: "test-token-123"
+                API-Secret: "test-secret-123"
+                Accept: "application/json"
+                User-Agent: "MineMeld"
+            source_name: dragos.IP
+            subscription_id_required: true
+            url: https://someurl.something
+            extractor: "indicators[?indicator_type=='ip']"
+            prefix: dragos
+            indicator: value
+            fields:
+                - comment
+                - first_seen
+                - last_seen
+                - confidence
+            age_out:
+                default: null
+                sudden_death: true
+                interval: 257
+            attributes:
+                type: IPv4
+                confidence: 100
+                share_level: red
+    
